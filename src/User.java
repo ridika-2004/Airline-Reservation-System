@@ -33,7 +33,7 @@ public abstract class User {
     }
 
     public static List<Customer> getCustomersCollection() {
-        return AdminUser.customersCollection;
+        return new ArrayList<>(AdminUser.customersCollection);
     }
 
     protected void displayFlightSchedule(Flight flightManager) {

@@ -85,11 +85,11 @@ public class RandomGenerator {
 
     //        ************************************************************ Setters & Getters ************************************************************
 
-    public void setRandomNum(String randomNum) {
+    private void setRandomNum(String randomNum) {
         this.randomNum = randomNum;
     }
 
     public String getRandomNumber() {
-        return randomNum;
+        return new String(randomNum);
     }
 }

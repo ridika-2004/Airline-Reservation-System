@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 class FlightManager {
@@ -19,7 +20,7 @@ class FlightManager {
     }
 
     public List<Flight> getFlightList() {
-        return flightList;
+        return new ArrayList<>(flightList);
     }
 
     

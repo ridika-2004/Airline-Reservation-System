@@ -7,7 +7,6 @@ import java.util.*;
 
 public class Flight extends FlightDistance {
 
-    // Constants
     private static final int NUM_OF_FLIGHTS = 15;
     private static final double GROUND_SPEED = 450.0;
     private static final int MINUTES_IN_HOUR = 60;
@@ -16,7 +15,6 @@ public class Flight extends FlightDistance {
     private static final int MINUTES_ROUND_THRESHOLD = 3;
     private static final int MINUTES_QUARTER = 15;
 
-    // Fields
     private final String flightSchedule;
     private final String flightNumber;
     private final String fromWhichCity;
@@ -31,7 +29,6 @@ public class Flight extends FlightDistance {
     private static int nextFlightDay = 0;
     private static final List<Flight> flightList = new ArrayList<>();
 
-    // Constructors
     public Flight() {
         this.flightSchedule = null;
         this.flightNumber = null;
@@ -58,7 +55,6 @@ public class Flight extends FlightDistance {
         this.gate = gate;
     }
 
-    // Methods
     public void flightScheduler() {
         RandomGenerator randomGenerator = new RandomGenerator();
         for (int i = 0; i < NUM_OF_FLIGHTS; i++) {
@@ -200,13 +196,13 @@ public class Flight extends FlightDistance {
         return newDatetime.truncatedTo(ChronoUnit.MINUTES);
     }
 
-    // Getters
     public int getNoOfSeats() {
-        return numOfSeatsInTheFlight;
+        int numOfSeatsInTheFlightCopy = numOfSeatsInTheFlight;
+        return numOfSeatsInTheFlightCopy;
     }
 
     public String getFlightNumber() {
-        return flightNumber;
+        return new String(flightNumber);
     }
 
     public void setNoOfSeatsInTheFlight(int numOfSeatsInTheFlight) {
@@ -214,30 +210,30 @@ public class Flight extends FlightDistance {
     }
 
     public String getFlightTime() {
-        return flightTime;
+        return new String(flightTime);
     }
 
     public List<Flight> getFlightList() {
-        return flightList;
+        return new ArrayList<>(flightList);
     }
 
     public List<Customer> getListOfRegisteredCustomersInAFlight() {
-        return listOfRegisteredCustomersInAFlight;
+        return new ArrayList<>(listOfRegisteredCustomersInAFlight);
     }
 
     public String getFlightSchedule() {
-        return flightSchedule;
+        return new String(flightSchedule);
     }
 
     public String getFromWhichCity() {
-        return fromWhichCity;
+        return new String(fromWhichCity);
     }
 
     public String getGate() {
-        return gate;
+        return new String(gate);
     }
 
     public String getToWhichCity() {
-        return toWhichCity;
+        return new String(toWhichCity);
     }
 }

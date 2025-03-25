@@ -191,58 +191,59 @@ public class Customer {
     }
 
     public List<Flight> getFlightsRegisteredByUser() {
-        return flightsRegisteredByUser;
+        return new ArrayList<>(flightsRegisteredByUser);
     }
 
     public String getPassword() {
-        return password;
+        return new String(password);
     }
 
     public String getPhone() {
-        return phone;
+        return new String(phone);
     }
 
     public String getAddress() {
-        return address;
+        return new String(address);
     }
 
     public String getEmail() {
-        return email;
+        return new String(email);
     }
 
     public int getAge() {
-        return age;
+        int ageCopy = age;
+        return ageCopy;
     }
 
     public String getUserID() {
-        return userID;
+        return new String(userID);
     }
 
     public String getName() {
-        return name;
+        return new String(name);
     }
 
     public List<Integer> getNumOfTicketsBookedByUser() {
-        return numOfTicketsBookedByUser;
+        return new ArrayList<>(numOfTicketsBookedByUser);
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPhone(String phone) {
+    private void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public void setAddress(String address) {
+    private void setAddress(String address) {
         this.address = address;
     }
 
-    public void setAge(int age) {
+    private void setAge(int age) {
         this.age = age;
     }
 }
