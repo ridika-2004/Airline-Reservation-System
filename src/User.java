@@ -3,14 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class User {
-    protected static String[][] adminUserNameAndPassword = new String[10][2];
-    protected static List<Customer> customersCollection = new ArrayList<>();
-    protected Scanner scanner = new Scanner(System.in);
 
-    static {
-        adminUserNameAndPassword[0][0] = "root";
-        adminUserNameAndPassword[0][1] = "root";
-    }
+    protected Scanner scanner = new Scanner(System.in);
 
     public abstract void showMenu();
 
@@ -67,7 +61,7 @@ public abstract class User {
     }
 
     public static List<Customer> getCustomersCollection() {
-        return customersCollection;
+        return AdminUser.customersCollection;
     }
 
     protected void displayFlightSchedule(Flight flightManager) {

@@ -104,8 +104,8 @@ public class MainSystem {
             password = scanner.nextLine();
         }
 
-        User.adminUserNameAndPassword[adminCount][0] = username;
-        User.adminUserNameAndPassword[adminCount][1] = password;
+        AdminUser.adminUserNameAndPassword[adminCount][0] = username;
+        AdminUser.adminUserNameAndPassword[adminCount][1] = password;
         adminCount++;
         System.out.println("Admin registration successful!");
     }

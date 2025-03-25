@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminUser extends User {
@@ -6,6 +8,14 @@ public class AdminUser extends User {
     private Customer customerManager;
     private FlightReservation bookingManager;
     private Flight flightManager;
+
+    protected static String[][] adminUserNameAndPassword = new String[10][2];
+    protected static List<Customer> customersCollection = new ArrayList<>();
+
+    static {
+        adminUserNameAndPassword[0][0] = "root";
+        adminUserNameAndPassword[0][1] = "root";
+    }
 
     public AdminUser(String username, RolesAndPermissions rp, Customer cm, FlightReservation bm, Flight fm) {
         this.username = username;
