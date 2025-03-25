@@ -28,7 +28,7 @@ public class PassengerUser extends User {
                 case 2 -> customerManager.editUserInfo(userId);
                 case 3 -> handleDeleteAccount();
                 case 4 -> displayFlightSchedule(flightManager);
-                case 5 -> bookingManager.cancelFlight(userId);
+                case 5 -> bookingManager.cancelFlight(userId, AdminUser.customersCollection);
                 case 6 -> bookingManager.displayFlightsRegisteredByOneUser(userId);
                 case 0 -> { /* Do nothing - will exit */ }
                 default -> {
@@ -61,7 +61,7 @@ public class PassengerUser extends User {
             System.out.print("ERROR!! You can't book more than 10 tickets at a time for single flight....Enter number of tickets again : ");
             numOfTickets = scanner.nextInt();
         }
-        bookingManager.bookFlight(flightToBeBooked, numOfTickets, userId);
+        bookingManager.bookFlight(flightToBeBooked, numOfTickets, userId, flightManager.getFlightList(), AdminUser.customersCollection);
     }
 
     private void handleDeleteAccount() {
