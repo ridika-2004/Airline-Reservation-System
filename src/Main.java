@@ -1,8 +1,6 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        User user = new User();
-        user.start();
+        User userSystem = new User();
+        userSystem.runSystem();
     }
 }
