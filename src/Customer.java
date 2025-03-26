@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Customer {
 
+    // ************************************************************ Fields
+    // ************************************************************
     private final String userID;
     private String email;
     private String name;
@@ -11,7 +13,11 @@ public class Customer {
     private int age;
     public List<Flight> flightsRegisteredByUser;
     public List<Integer> numOfTicketsBookedByUser;
-    public static final List<Customer> customerCollection = AdminUser.customersCollection;
+    public static final List<Customer> customerCollection = AdminUser.getCustomersCollection();
+
+    // ************************************************************
+    // Behaviours/Methods
+    // ************************************************************
 
     Customer() {
         this.userID = null;
@@ -23,6 +29,17 @@ public class Customer {
         this.age = 0;
     }
 
+    /**
+     * Registers new customer to the program. Obj of RandomGenerator(Composition) is
+     * being used to assign unique userID to the newly created customer.
+     *
+     * @param name     name of the customer
+     * @param email    customer's email
+     * @param password customer's account password
+     * @param phone    customer's phone-number
+     * @param address  customer's address
+     * @param age      customer's age
+     */
     Customer(String name, String email, String password, String phone, String address, int age) {
         RandomGenerator random = new RandomGenerator();
         random.randomIDGen();
@@ -37,6 +54,13 @@ public class Customer {
         this.numOfTicketsBookedByUser = new ArrayList<>();
     }
 
+    /**
+     * Takes input for the new customer and adds them to programs memory.
+     * isUniqueData() validates the entered email
+     * and returns true if the entered email is already registered. If email is
+     * already registered, program will ask the user
+     * to enter new email address to get himself register.
+     */
     public void addNewCustomer() {
         System.out.printf("\n\n\n%60s ++++++++++++++ Welcome to the Customer Registration Portal ++++++++++++++", "");
         Scanner read = new Scanner(System.in);
@@ -61,11 +85,25 @@ public class Customer {
         customerCollection.add(new Customer(name, email, password, phone, address, age));
     }
 
+    /**
+     * Returns String consisting of customers data(name, age, email etc...) for
+     * displaying.
+     * randomIDDisplay() adds space between the userID for easy readability.
+     *
+     * @param i for serial numbers.
+     * @return customers data in String
+     */
     private String toString(int i) {
         return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i,
                 randomIDDisplay(userID), name, age, email, address, phone);
     }
 
+    /**
+     * Searches for customer with the given ID and displays the customers' data if
+     * found.
+     *
+     * @param ID of the searching/required customer
+     */
     public void searchUser(String ID) {
         boolean isFound = false;
         Customer customerWithTheID = customerCollection.get(0);
@@ -88,6 +126,11 @@ public class Customer {
         }
     }
 
+    /**
+     * Returns true if the given emailID is already registered, false otherwise
+     *
+     * @param emailID to be checked in the list
+     */
     public boolean isUniqueData(String emailID) {
         boolean isUnique = false;
         for (Customer c : customerCollection) {
@@ -145,6 +188,12 @@ public class Customer {
         }
     }
 
+    /**
+     * Shows the customers' data in formatted way.
+     * 
+     * @param showHeader to check if we want to print ascii art for the customers'
+     *                   data.
+     */
     public void displayCustomersData(boolean showHeader) {
         displayHeader();
         Iterator<Customer> iterator = customerCollection.iterator();
@@ -159,6 +208,9 @@ public class Customer {
         }
     }
 
+    /**
+     * Shows the header for printing customers data
+     */
     void displayHeader() {
         System.out.println();
         System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
@@ -168,6 +220,16 @@ public class Customer {
 
     }
 
+    /**
+     * Adds space between userID to increase its readability
+     * <p>
+     * Example:
+     * </p>
+     * <b>"920 191" is much more readable than "920191"</b>
+     *
+     * @param randomID id to add space
+     * @return randomID with added space
+     */
     String randomIDDisplay(String randomID) {
         StringBuilder newString = new StringBuilder();
         for (int i = 0; i <= randomID.length(); i++) {
@@ -180,65 +242,83 @@ public class Customer {
         return newString.toString();
     }
 
+    /**
+     * Associates a new flight with the specified customer
+     *
+     * @param f flight to associate
+     */
+    void addNewFlightToCustomerList(Flight f) {
+        this.flightsRegisteredByUser.add(f);
+        // numOfFlights++;
+    }
+
+    /**
+     * Adds numOfTickets to already booked flights
+     * 
+     * @param index        at which flight is registered in the arraylist
+     * @param numOfTickets how many tickets to add
+     */
     void addExistingFlightToCustomerList(int index, int numOfTickets) {
         int newNumOfTickets = numOfTicketsBookedByUser.get(index) + numOfTickets;
         this.numOfTicketsBookedByUser.set(index, newNumOfTickets);
     }
 
+    // ************************************************************ Setters &
+    // Getters ************************************************************
+
     public List<Flight> getFlightsRegisteredByUser() {
-        return new ArrayList<>(flightsRegisteredByUser);
+        return flightsRegisteredByUser;
     }
 
     public String getPassword() {
-        return new String(password);
+        return password;
     }
 
     public String getPhone() {
-        return new String(phone);
+        return phone;
     }
 
     public String getAddress() {
-        return new String(address);
+        return address;
     }
 
     public String getEmail() {
-        return new String(email);
+        return email;
     }
 
     public int getAge() {
-        int ageCopy = age;
-        return ageCopy;
+        return age;
     }
 
     public String getUserID() {
-        return new String(userID);
+        return userID;
     }
 
     public String getName() {
-        return new String(name);
+        return name;
     }
 
     public List<Integer> getNumOfTicketsBookedByUser() {
-        return new ArrayList<>(numOfTicketsBookedByUser);
+        return numOfTicketsBookedByUser;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    private void setPhone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    private void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    private void setAge(int age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

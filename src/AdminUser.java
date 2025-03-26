@@ -1,26 +1,25 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminUser extends User {
     private String username;
-    private RolesAndPermissions rolesAndPermissions;
-    private Customer customerManager;
+    private Customer customer;
     private FlightReservation bookingManager;
-    private Flight flightManager;
+    private Flight flight;
+    static List<Customer> customersCollection = new ArrayList<>();
 
-    protected static String[][] adminUserNameAndPassword = new String[10][2];
-    protected static List<Customer> customersCollection = new ArrayList<>();
+    static String[][] adminUserNameAndPassword = new String[10][2];
 
     static {
         adminUserNameAndPassword[0][0] = "root";
         adminUserNameAndPassword[0][1] = "root";
     }
 
-    public AdminUser(String username, RolesAndPermissions rp, Customer cm, FlightReservation bm, Flight fm) {
+    public AdminUser(String username, Customer cm, FlightReservation bm, Flight fm) {
         this.username = username;
-        this.rolesAndPermissions = rp;
-        this.customerManager = cm;
+        this.customer = cm;
         this.bookingManager = bm;
-        this.flightManager = fm;
+        this.flight = fm;
     }
 
     @Override
@@ -33,11 +32,11 @@ public class AdminUser extends User {
             desiredOption = scanner.nextInt();
 
             switch (desiredOption) {
-                case 1 -> handleAddPassenger();
+                case 1 -> customer.addNewCustomer();
                 case 2 -> handleSearchPassenger();
                 case 3 -> handleUpdatePassenger();
                 case 4 -> handleDeletePassenger();
-                case 5 -> customerManager.displayCustomersData(false);
+                case 5 -> customer.displayCustomersData(false);
                 case 6 -> handleDisplayFlightsByPassenger();
                 case 7 -> handleDisplayPassengersByFlight();
                 case 8 -> handleDeleteFlight();
@@ -48,6 +47,10 @@ public class AdminUser extends User {
                 }
             }
         } while (desiredOption != 0);
+    }
+
+    public static List<Customer> getCustomersCollection() {
+        return customersCollection;
     }
 
     private void displayAdminMenu() {
@@ -64,35 +67,31 @@ public class AdminUser extends User {
         System.out.print("Enter the desired Choice :   ");
     }
 
-    private void handleAddPassenger() {
-        customerManager.addNewCustomer();
-    }
-
     private void handleSearchPassenger() {
-        customerManager.displayCustomersData(false);
+        customer.displayCustomersData(false);
         System.out.print("Enter the CustomerID to Search :\t");
         String customerID = scanner.nextLine();
         System.out.println();
-        customerManager.searchUser(customerID);
+        customer.searchUser(customerID);
     }
 
     private void handleUpdatePassenger() {
-        customerManager.displayCustomersData(false);
+        customer.displayCustomersData(false);
         System.out.print("Enter the CustomerID to Update its Data :\t");
         String customerID = scanner.nextLine();
         if (customersCollection.size() > 0) {
-            customerManager.editUserInfo(customerID);
+            customer.editUserInfo(customerID);
         } else {
             System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
         }
     }
 
     private void handleDeletePassenger() {
-        customerManager.displayCustomersData(false);
+        customer.displayCustomersData(false);
         System.out.print("Enter the CustomerID to Delete its Data :\t");
         String customerID = scanner.nextLine();
         if (customersCollection.size() > 0) {
-            customerManager.deleteUser(customerID);
+            customer.deleteUser(customerID);
         } else {
             System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
         }
@@ -110,7 +109,7 @@ public class AdminUser extends User {
         if ('y' == choice || 'Y' == choice) {
             bookingManager.displayRegisteredUsersForAllFlight();
         } else if ('n' == choice || 'N' == choice) {
-            flightManager.displayFlightSchedule();
+            flight.displayFlightSchedule();
             System.out.print("Enter the Flight Number to display the list of passengers registered in that flight... ");
             String flightNum = scanner.nextLine();
             bookingManager.displayRegisteredUsersForASpecificFlight(flightNum);
@@ -120,9 +119,9 @@ public class AdminUser extends User {
     }
 
     private void handleDeleteFlight() {
-        flightManager.displayFlightSchedule();
+        flight.displayFlightSchedule();
         System.out.print("Enter the Flight Number to delete the flight : ");
         String flightNum = scanner.nextLine();
-        flightManager.deleteFlight(flightNum);
+        flight.deleteFlight(flightNum);
     }
 }

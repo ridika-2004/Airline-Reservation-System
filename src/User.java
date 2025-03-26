@@ -32,10 +32,6 @@ public abstract class User {
 
     }
 
-    public static List<Customer> getCustomersCollection() {
-        return new ArrayList<>(AdminUser.customersCollection);
-    }
-
     protected void displayFlightSchedule(Flight flightManager) {
         flightManager.displayFlightSchedule();
         flightManager.displayMeasurementInstructions();

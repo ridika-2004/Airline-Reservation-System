@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class MainSystem {
     private User currentUser;
     private RolesAndPermissions rolesAndPermissions;
-    private Customer customerManager;
+    private Customer customer;
     private FlightReservation bookingManager;
     private Flight flightManager;
     private Scanner scanner;
@@ -11,7 +11,7 @@ public class MainSystem {
 
     public MainSystem() {
         this.rolesAndPermissions = new RolesAndPermissions();
-        this.customerManager = new Customer();
+        this.customer = new Customer();
         this.bookingManager = new FlightReservation();
         this.flightManager = new Flight();
         this.scanner = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class MainSystem {
                 case 1 -> handleAdminLogin();
                 case 2 -> handleAdminRegistration();
                 case 3 -> handlePassengerLogin();
-                case 4 -> customerManager.addNewCustomer();
+                case 4 -> customer.addNewCustomer();
                 case 5 -> new User() {
                     @Override public void showMenu() {}
                 }.manualInstructions();
@@ -82,10 +82,9 @@ public class MainSystem {
             System.out.println("ERROR: Invalid credentials");
         } else if (privilege == 0) {
             System.out.println("You have standard privileges (view only)");
-            customerManager.displayCustomersData(true);
+            customer.displayCustomersData(true);
         } else {
-            currentUser = new AdminUser(username, rolesAndPermissions, customerManager,
-                    bookingManager, flightManager);
+            currentUser = new AdminUser(username, customer, bookingManager, flightManager);
             currentUser.showMenu();
         }
     }
@@ -119,7 +118,7 @@ public class MainSystem {
 
         String[] result = rolesAndPermissions.isPassengerRegistered(email, password).split("-");
         if (Integer.parseInt(result[0]) == 1) {
-            currentUser = new PassengerUser(email, result[1], customerManager,
+            currentUser = new PassengerUser(email, result[1], customer,
                     bookingManager, flightManager);
             currentUser.showMenu();
         } else {
