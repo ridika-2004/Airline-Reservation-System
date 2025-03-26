@@ -25,7 +25,7 @@ public class FlightReservation extends DisplayManager {
         if (!flight.getListOfRegisteredCustomersInAFlight().contains(customer)) {
             flight.addNewCustomerToFlight(customer);
         }
-        customer.addNewFlightToCustomerList(flight);
+        customer.flightsRegisteredByUser.add(flight);
         customer.numOfTicketsBookedByUser.add(numOfTickets);
     
         System.out.printf("You've booked %d tickets for Flight \"%s\"...\n", numOfTickets, flightNo.toUpperCase());
