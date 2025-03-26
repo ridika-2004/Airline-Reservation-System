@@ -13,7 +13,7 @@ public class MainSystem {
         this.rolesAndPermissions = new RolesAndPermissions();
         this.customer = new Customer("","","","","",0);
         this.bookingManager = new FlightReservation();
-        this.flightManager = new Flight();
+        this.flightManager = new Flight(null,null,0,null,null,null);
         this.scanner = new Scanner(System.in);
         flightManager.flightScheduler();
     }

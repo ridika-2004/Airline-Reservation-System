@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class DisplayFlightClass {
-    Flight flight = new Flight();
+    Flight flight = new Flight(null,null,0,null,null,null);
 
     public void displayRegisteredUsersForAllFlight(){
         System.out.println();

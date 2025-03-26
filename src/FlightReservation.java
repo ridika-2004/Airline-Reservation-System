@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class FlightReservation {
 
     //        ************************************************************ Fields ************************************************************
-    Flight flight = new Flight();
+    Flight flight = new Flight(null,null,0,null,null,null);
     int flightIndexInFlightList;
 
     void bookFlight(String flightNo, int numOfTickets, String userID) {
