@@ -11,7 +11,7 @@ public class MainSystem {
 
     public MainSystem() {
         this.rolesAndPermissions = new RolesAndPermissions();
-        this.customer = new Customer();
+        this.customer = new Customer("","","","","",0);
         this.bookingManager = new FlightReservation();
         this.flightManager = new Flight();
         this.scanner = new Scanner(System.in);
